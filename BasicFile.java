@@ -7,7 +7,7 @@ public class BasicFile {
         // Write to File
         try {
             PrintWriter output = new PrintWriter(file);
-            output.println("Williams Sissoko");
+            output.println("John Doe");
             output.println(23);
             output.close();
         } catch (IOException ex) {
