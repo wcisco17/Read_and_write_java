@@ -7,7 +7,7 @@ import java.util.*;
 
 
 
-public class BasicFile {
+public class BasicFile  {
 
     // Short hand for System.out
     public static void out(Object s) {
@@ -18,17 +18,25 @@ public class BasicFile {
         String name;
         int age; 
         String nameFile= "";
+        String userInput;
+        boolean error = false;
         Scanner c = new Scanner(System.in);
 
-        boolean error = false;
+        out("Name text file: ");
+        nameFile = c.nextLine();
+        
+        File file = new File(nameFile+".txt");
+
+        out("Would you like to read or write? ");
+
+        userInput = c.nextLine();
+
+        
+        
+        if (userInput.contains("w")) {
         do {
             error = false;
             try {
-                out("Name text file: ");
-                nameFile = c.nextLine();
-                
-                File file = new File(nameFile+".txt");
-
                 out("Enter your name: ");
                 name = c.nextLine();
                 
@@ -47,17 +55,20 @@ public class BasicFile {
             }
         } while(error);
         
-
+    } else if (userInput.contains("r")) {
+            try {
+                Scanner in = new Scanner(file);
+                name = in.nextLine();
+                age = in.nextInt();
+                out("File Content \n" + "Name: " + name + "\nAge: " + age);
+                in.close();
+            } catch (Exception e) {
+                out("File not found");
+            }
+    }
 
         out("Program Ends");
 
     }
 }
-
-
-
-
-
-
-
 
