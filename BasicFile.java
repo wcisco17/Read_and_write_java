@@ -1,34 +1,61 @@
-import javax.swing.JOptionPane;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.*;
+
+
+
 
 public class BasicFile {
+
+    // Short hand for System.out
+    public static void out(Object s) {
+        System.out.println(s);
+    }
+
     public static void main(String[] args) {
-        File file = new File("test.txt");
+        String name;
+        int age; 
+        String nameFile= "";
+        Scanner c = new Scanner(System.in);
 
-        // Write to File
-        try {
-            PrintWriter output = new PrintWriter(file);
-            output.println("John Doe");
-            output.println(23);
-            output.close();
-        } catch (IOException ex) {
-            System.out.printf("Error: %s\n", ex);
-        }
+        boolean error = false;
+        do {
+            error = false;
+            try {
+                out("Name text file: ");
+                nameFile = c.nextLine();
+                
+                File file = new File(nameFile+".txt");
 
-
-        // Read to file
-        try {
-            Scanner in = new Scanner(file);
-            String name = in.nextLine();
-            int age = in.nextInt();
-            in.close();
+                out("Enter your name: ");
+                name = c.nextLine();
+                
+                out("Enter your age: ");
+                age = c.nextInt();
+                
+                
+               PrintWriter output = new PrintWriter(file);
+               output.println(name);
+               output.println(age);
+               output.close();
+    
+            } catch (Exception e) {
+                out("Please either put in an integer or String");
+               error = true;
+            }
+        } while(error);
         
-            System.out.printf("Name: %s Age: %d\n", name, age);
 
-        } catch (FileNotFoundException ex) {
-            System.out.printf("Error: %s\n", ex);
-        }
+
+        out("Program Ends");
+
     }
 }
+
+
+
 
 
 
